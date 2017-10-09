@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AmwayDotCom.Framework.Browser;
+using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace AmwayDotCom
@@ -6,64 +8,61 @@ namespace AmwayDotCom
     [Binding]
     public class SearchAsAVisitorSteps
     {
+        private IWebDriver _driver;
+        readonly CustomDriver _csDriver;
+
+        public SearchAsAVisitorSteps()
+        {
+            _csDriver = (CustomDriver)ScenarioContext.Current["Driver"];
+            
+        }
+
         [Given]
         public void Given_A_user_is_on_amway_com()
         {
-            ScenarioContext.Current.Pending();
+            _driver = _csDriver.Init();
+            _driver.Navigate().GoToUrl("http://www.amway.com");
+            
         }
         
-        [Given]
-        public void Given_A_User_is_on_amway_com()
-        {
-            ScenarioContext.Current.Pending();
-        }
+
         
         [When]
-        public void When_The_user_searches_for_P0(string p0)
+        public void When_the_user_searches_for_P0(string p0)
         {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When]
-        public void When_The_User_Searches_for_P0(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When]
-        public void When_The_user_Searches_for_P0(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
+            var searchbox = _driver.FindElement(By.Id("ctl00_ctl09___ctl00___tbxSearchInterface"));
+            searchbox.SendKeys(p0);
+            searchbox.SendKeys(Keys.Enter);
+            
+        }       
+
         
         [Then]
         public void Then_the_result_screen_should_be_displayed()
         {
-            ScenarioContext.Current.Pending();
+            NUnit.Framework.Assert.IsTrue(_driver.Title.Contains("Search Results"), "Results Page was not displayed as expected");
         }
         
         [Then]
         public void Then_the_product_page_should_be_displayed()
         {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then]
-        public void Then_the_result_screen_shoiuld_be_displayed()
-        {
-            ScenarioContext.Current.Pending();
-        }
+            NUnit.Framework.Assert.IsTrue(_driver.Url.Contains("Product.aspx"), "Product Page not displayed as expected");
+        }       
+   
         
         [Then]
         public void Then_the_screen_should_display_text_indicating_these_are_correctd()
         {
-            ScenarioContext.Current.Pending();
+            NUnit.Framework.Assert.IsTrue(_driver.PageSource.Contains("yielded no results, but we did find"), "Corrected Results Page was not displayed as expected");
         }
-        
+
+
         [Then]
-        public void Then_the_result_screen_should_indicate()
+        public void Then_the_result_should_be_no_results_found()
         {
-            ScenarioContext.Current.Pending();
+            NUnit.Framework.Assert.IsTrue(_driver.PageSource.Contains("yielded no results. Please enter another product name or keyword in the search box."));
         }
+
+
     }
 }

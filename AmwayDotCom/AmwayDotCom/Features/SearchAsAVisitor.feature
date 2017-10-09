@@ -16,13 +16,14 @@ Scenario: Search for a product by SKU
 
 @search
 Scenario: Search for a Miss-spelled product
-	Given A User is on amway.com
+	Given A user is on amway.com
 	When The User Searches for 'Douuble X'
-	Then the result screen shoiuld be displayed
+	Then the result screen should be displayed
 	And the screen should display text indicating these are correctd
 
 @search
 Scenario: Search for non-existent product
 	Given A user is on amway.com
 	When The user Searches for 'mc bubblious fish eyes'
-	Then the result screen should indicate 
+	Then the result screen should be displayed
+	And the result should be no results found
