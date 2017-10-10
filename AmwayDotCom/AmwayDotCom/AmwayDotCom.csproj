@@ -59,19 +59,43 @@
     <Reference Include="WebDriver, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.6.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Support, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.6.0\lib\net45\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Search.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SearchAsAnIBO.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchAsAnIBO.feature</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Browser.cs" />
+    <Compile Include="Framework\PageObjects\LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Features\SearchAsAVisitor.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchAsAVisitor.feature</DependentUpon>
     </Compile>
+    <Compile Include="StepDefinitions\SearchAsAnIBOSteps.cs" />
     <Compile Include="StepDefinitions\SearchAsAVisitorSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Search.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Search.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SearchAsAnIBO.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchAsAnIBO.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Features\SearchAsAVisitor.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

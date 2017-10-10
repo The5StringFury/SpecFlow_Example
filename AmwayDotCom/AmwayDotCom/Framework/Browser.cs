@@ -11,6 +11,7 @@ using System.Collections.Specialized;
 
 using System.IO;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace AmwayDotCom.Framework.Browser
 {
@@ -18,7 +19,7 @@ namespace AmwayDotCom.Framework.Browser
     public sealed class BrowserSetup
     {
         private CustomDriver Driver;
-        private string[] tags;
+      
 
         [BeforeScenario]
         public void BeforeScenario()
@@ -48,12 +49,18 @@ namespace AmwayDotCom.Framework.Browser
 
         public IWebDriver Init()
         {
+            
 
             ChromeOptions options = new ChromeOptions();
 
             driver = new OpenQA.Selenium.Chrome.ChromeDriver(options);
 
+            this.context.Add("CurrentBrowser", driver);
+            return driver;
+        }
 
+        public IWebDriver GetCurrent()
+        {
             return driver;
         }
 
@@ -62,5 +69,7 @@ namespace AmwayDotCom.Framework.Browser
             driver.Quit();
 
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AmwayDotCom.Framework.Browser;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using TechTalk.SpecFlow;
 
@@ -33,14 +34,15 @@ namespace AmwayDotCom
             var searchbox = _driver.FindElement(By.Id("ctl00_ctl09___ctl00___tbxSearchInterface"));
             searchbox.SendKeys(p0);
             searchbox.SendKeys(Keys.Enter);
-            
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("*")));
         }       
 
         
         [Then]
         public void Then_the_result_screen_should_be_displayed()
         {
-            NUnit.Framework.Assert.IsTrue(_driver.Title.Contains("Search Results"), "Results Page was not displayed as expected");
+            NUnit.Framework.Assert.IsTrue(_driver.Url.Contains("SearchResults.aspx"), "Results Page was not displayed as expected");
         }
         
         [Then]
